@@ -34,8 +34,9 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
     public List<Animal> getAnimalsByCountry(Country country) {
         List<Animal> animals = new ArrayList<>();
-       //TODO animalRepository.find by country method needed.
-        return null;
+        animalRepository.findAllByCountry(country)
+                .forEach(animals::add);
+        return animals;
     }
 
     @Override

@@ -18,6 +18,7 @@ public class CountryControllerImpl implements CountryController {
     public CountryControllerImpl(CountryServiceImpl countryService){
         this.countryService = countryService;
     }
+
     @Override
     @GetMapping("/countries")
     public String showAllCountries(Model model) {
@@ -26,9 +27,9 @@ public class CountryControllerImpl implements CountryController {
     }
 
     @Override
-    @PostMapping("/createCountry")
+    @PostMapping("countries/addCountry")
     public String createCountry(Country country) {
-        countryService.createCountry(country);
+        countryService.createCountry(new Country("", ""));
         return "redirect:/countries";
     }
 }

@@ -1,6 +1,7 @@
 package be.intecbrussel.zoo.controllers.implementations;
 
 import be.intecbrussel.zoo.controllers.interfaces.AnimalController;
+import be.intecbrussel.zoo.data.Animal;
 import be.intecbrussel.zoo.data.Country;
 import be.intecbrussel.zoo.services.implementations.AnimalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +23,25 @@ public class AnimalControllerImpl implements AnimalController {
     }
 
     @Override
-    @GetMapping("/animals/{country}")
+    @GetMapping("/countries/{name}/animals")
     public String seeAllAnimalsByCountry(Model model, @PathVariable String countryName) {
         //TODO check this method
         model.addAttribute("animals", animalService.getAnimalsByCountry(new Country(countryName)));
-        return "animals";
+        return "countries/{name}/animals";
     }
 
     @Override
     //TODO check if annotation is correct. create method
-    @PostMapping("/addAnimal")
-    public String addAnimal(String animalName, String countryName) {
-
-        return null;
+    @PostMapping("countries/{name}/animals")
+    public String addAnimal(String animalName, @PathVariable String countryName) {
+        animalService.addAnimal(new Animal(animalName, new Country(countryName)));
+        return "redirect:/countries/{name}/animals";
     }
 
     @Override
     @DeleteMapping("animals/{id}")
     public String deleteAnimal(@PathVariable long animalId) {
         animalService.deleteAnimal(animalId);
-        return "redirect:/animals";
+        return "redirect:/countries/{name}/animals";
     }
 }
