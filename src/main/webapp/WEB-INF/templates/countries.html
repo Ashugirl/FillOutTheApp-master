@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 
 <head>
 
@@ -31,16 +31,15 @@
         <a>country 3</a>-->
     </ul></div>
     
-      <form method="post" th:action="@{/addCountry}" th:object="${country}">
+    <form action="#" th:action="@{/addCountry}" th:object="${country}" method="post">
 
-        <input type="text" name="countryName" th:text="${country.countryName}"> <br>
+        <input type="text" name="countryName" th:field="*{country.countryName}"> <br>
           
 
         <input type="submit" value="create">
 
 
     </form>
-
 
 
 
