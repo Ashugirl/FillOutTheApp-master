@@ -24,14 +24,14 @@
 
 
 
-<div th:each="country:${countries}">
-    <ul>
+
+    <ul th:each="country:${countries}">
         <a th:text="${country.countryName}">country 1</a><br>
       <!--  <a>country 2</a>
         <a>country 3</a>-->
-    </ul></div>
+    </ul>
     
-    <form action="#" th:action="@{/addCountry}" th:object="${country}" method="post">
+   <form action="#" th:action="@{/addCountry}" th:object="${country}" method="post">
 
         <input type="text" name="countryName" th:field="*{country.countryName}"> <br>
           

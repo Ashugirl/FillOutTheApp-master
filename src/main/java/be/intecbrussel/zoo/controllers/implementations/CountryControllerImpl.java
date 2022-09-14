@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -24,14 +25,16 @@ public class CountryControllerImpl implements CountryController {
     @GetMapping("/countries")
     public String showAllCountries(Model model) {
         model.addAttribute("countries", countryService.getAllCountries());
-        return "countries/addCountry";
+        return "countries";
     }
+
+
 
     @Override
     @PostMapping("/addCountry")
-    public String createCountry(@ModelAttribute("countryName") Country country) {
+    public String createCountry(Country country) {
         countryService.createCountry(country);
        // country.setCountryName("");
-        return "redirect:/countries";
+        return "countries";
     }
 }
