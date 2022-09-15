@@ -26,7 +26,7 @@
 
 
     <ul th:each="country:${countries}">
-        <a href="countries/{countryName}/animals" th:text="${country.countryName}">country</a><br>
+        <a href="{countryName}/animals" th:text="${country.countryName}">country</a><br>
        <!--<a>country 2</a>
         <a>country 3</a>-->
     </ul>

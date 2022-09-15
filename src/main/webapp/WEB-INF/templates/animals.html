@@ -17,8 +17,12 @@
 <div class="main">
 
 
+    <pre id="quote">"Animals from <script>
+    let countryName = document.getElementById("countryName");
+    countryName.innerHTML = ${country.countryName};
+    </script>"</pre>
 
-    <pre id="quote">"Animals from [[${country.countryName}]]" </pre>
+
     <a th:href="@{/countries}"> BACK </a>
 
 
@@ -26,20 +30,20 @@
 
 
 
-    <ul>
+    <ul th:each="animal:${animals}">
         <a>animal 1 <button>Delete</button></a>
-        <a>animal 2 <button>Delete</button></a>
-        <a>animal 3 <button>Delete</button></a>
+        <!--<a>animal 2 <button>Delete</button></a>
+        <a>animal 3 <button>Delete</button></a>-->
     </ul>
 
-  <!--  <form method= "post" th:action = @{/addAnimal/{c}(c=${animal.country.countryName})}>
+   <form method="post" th:action="@{/addAnimal/{c}(c=${animal.country.countryName})}">
 
-        <input type="text" name="animalName" th:text = ${animal.animalName}>
+        <input type="text" name="animalName" th:text="${animal.animalName}"><br>
 
         <input type="submit" value="create">
 
 
-    </form>-->
+    </form>
 
 
 
