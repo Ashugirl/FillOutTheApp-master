@@ -23,11 +23,13 @@ public class AnimalControllerImpl implements AnimalController {
     }
 
     @Override
-    @GetMapping("/countries/{name}/animals")
+    @GetMapping("/countries/{countryName}/animals")
     public String seeAllAnimalsByCountry(Model model, @PathVariable String countryName) {
         //TODO check this method
-        model.addAttribute("animals", animalService.getAnimalsByCountry(new Country(countryName)));
-        return "countries/{name}/animals";
+        model.addAttribute("countryName", animalService.getAnimalsByCountry(new Country(countryName)));
+        model.addAttribute("animal", new Animal());
+
+        return "countries/{countryName}/animals";
     }
 
     @Override

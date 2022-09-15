@@ -6,10 +6,7 @@ import be.intecbrussel.zoo.services.implementations.CountryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class CountryControllerImpl implements CountryController {
@@ -25,16 +22,15 @@ public class CountryControllerImpl implements CountryController {
     @GetMapping("/countries")
     public String showAllCountries(Model model) {
         model.addAttribute("countries", countryService.getAllCountries());
+        model.addAttribute("country", new Country(""));
         return "countries";
     }
-
 
 
     @Override
     @PostMapping("/addCountry")
     public String createCountry(Country country) {
         countryService.createCountry(country);
-       // country.setCountryName("");
-        return "countries";
+        return "redirect:/countries";
     }
 }
