@@ -16,10 +16,12 @@ import java.util.Optional;
 public class AnimalServiceImpl implements AnimalService {
 
     private AnimalRepository animalRepository;
+    private CountryServiceImpl countryService;
 
     @Autowired
-    public AnimalServiceImpl(AnimalRepository animalRepository){
+    public AnimalServiceImpl(AnimalRepository animalRepository, CountryServiceImpl countryService){
         this.animalRepository = animalRepository;
+        this.countryService = countryService;
     }
 
     @Override
@@ -41,6 +43,10 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public void addAnimal(Animal animal) {
+        Country country = new Country();
+        countryService.getCountryByName(country.getCountryName());
+        animal.setCountry(country);
+       // animal = new Animal("", countryService.getCountryByName("")) ;
         animalRepository.save(animal);
     }
 

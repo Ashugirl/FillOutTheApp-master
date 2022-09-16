@@ -17,11 +17,9 @@
 <div class="main">
 
 
-    <pre id="quote">"Animals from <script>
-    let countryName = document.getElementById("countryName");
-    countryName.innerHTML = ${country.countryName};
-    </script>"</pre>
+   <!-- <h1 th:text="${country.countryName}">Animals from country</h1>-->
 
+    <pre id="quote">"Animals from <span th:text="${animal.country.countryName}">countryName</span>"</pre>
 
     <a th:href="@{/countries}"> BACK </a>
 
@@ -31,7 +29,7 @@
 
 
     <ul th:each="animal:${animals}">
-        <a>animal 1 <button>Delete</button></a>
+        <a th:text="${animal.animalName}">animal<button>Delete</button></a>
         <!--<a>animal 2 <button>Delete</button></a>
         <a>animal 3 <button>Delete</button></a>-->
     </ul>

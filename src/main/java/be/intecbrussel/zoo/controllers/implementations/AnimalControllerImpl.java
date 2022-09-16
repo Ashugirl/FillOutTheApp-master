@@ -8,10 +8,7 @@ import be.intecbrussel.zoo.services.implementations.CountryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AnimalControllerImpl implements AnimalController {
@@ -27,23 +24,28 @@ public class AnimalControllerImpl implements AnimalController {
     }
 
     @Override
-    @GetMapping("/{countryName}/animals")
-    public String seeAllAnimalsByCountry(Model model, @PathVariable String countryName) {
+    @GetMapping("/animals/{countryName}")
+    public String seeAllAnimalsByCountry(Model model, @PathVariable("countryName") String countryName) {
         //TODO check this method
         Country country = new Country("");
+        model.addAttribute("countryName", countryService.getCountryByName(""));
         model.addAttribute("country", countryService.getCountryByName(country.getCountryName()));
         model.addAttribute("animals", animalService.getAnimalsByCountry(country));
-        model.addAttribute("animal", new Animal("", country));
+        model.addAttribute("animal", new Animal("", countryName));
 
         return "animals";
     }
 
     @Override
     //TODO check if annotation is correct. create method
-    @PostMapping("{countryName}/addAnimal")
-    public String addAnimal(String animalName, @PathVariable String countryName) {
-        animalService.addAnimal(new Animal("", new Country(countryName)));
-        return "redirect:/animals";
+    @PostMapping("/addAnimal/{countryName}")
+    public String addAnimal(String animalName, String countryName) {
+        //Country country = new Country(countryName);
+        //countryService.getCountryByName(country.getCountryName());
+        Animal animal = new Animal("", countryName);
+        animal.setCountry(new Country(countryName));
+        animalService.addAnimal(animal);
+        return "animals";
     }
 
     @Override

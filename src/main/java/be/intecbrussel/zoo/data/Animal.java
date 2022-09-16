@@ -1,15 +1,12 @@
 package be.intecbrussel.zoo.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Animal {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String animalName;
     @ManyToOne
@@ -19,9 +16,9 @@ public class Animal {
 
     }
 
-    public Animal(String animalName, Country country) {
+    public Animal(String animalName, String countryName) {
         this.animalName = animalName;
-        this.country = country;
+        this.country = new Country(countryName,"");
     }
 
     public long getId() {
@@ -45,7 +42,7 @@ public class Animal {
     }
 
     public void setCountry(Country country) {
-        this.country = country;
+        this.country=country;
     }
 
     @Override
