@@ -6,19 +6,20 @@ import javax.persistence.*;
 public class Animal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
     private String animalName;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "countryName")
     private Country country;
 
     public Animal() {
 
     }
 
-    public Animal(String animalName, String countryName) {
+    public Animal(String animalName, Country country) {
         this.animalName = animalName;
-        this.country = new Country(countryName,"");
+        this.country = country;
     }
 
     public long getId() {
@@ -48,7 +49,7 @@ public class Animal {
     @Override
     public String toString() {
         return "Animal{" +
-                "id=" + id +
+               "id=" + id +
                 ", animalName='" + animalName + '\'' +
                 ", country=" + country +
                 '}';

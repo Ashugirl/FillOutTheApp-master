@@ -26,32 +26,25 @@ public class AnimalControllerImpl implements AnimalController {
     @Override
     @GetMapping("/animals/{countryName}")
     public String seeAllAnimalsByCountry(Model model, @PathVariable("countryName") String countryName) {
-        //TODO check this method
-        Country country = new Country("");
-        model.addAttribute("countryName", countryService.getCountryByName(""));
-        model.addAttribute("country", countryService.getCountryByName(country.getCountryName()));
+        Country country = countryService.getCountryByName(countryName);
         model.addAttribute("animals", animalService.getAnimalsByCountry(country));
-        model.addAttribute("animal", new Animal("", countryName));
-
+        model.addAttribute("animal", new Animal("", country));
         return "animals";
     }
 
     @Override
-    //TODO check if annotation is correct. create method
     @PostMapping("/addAnimal/{countryName}")
-    public String addAnimal(String animalName, String countryName) {
-        //Country country = new Country(countryName);
-        //countryService.getCountryByName(country.getCountryName());
-        Animal animal = new Animal("", countryName);
-        animal.setCountry(new Country(countryName));
+    public String addAnimal(String animalName, @PathVariable String countryName) {
+        Country country = countryService.getCountryByName(countryName);
+        Animal animal = new Animal(animalName, country);
         animalService.addAnimal(animal);
-        return "animals";
+        return "redirect:/animals/{countryName}";
     }
 
     @Override
     @DeleteMapping("animals/{id}")
     public String deleteAnimal(@PathVariable long animalId) {
         animalService.deleteAnimal(animalId);
-        return "redirect:{countryName}/animals";
+        return "redirect:/animals/{countryName}";
     }
 }

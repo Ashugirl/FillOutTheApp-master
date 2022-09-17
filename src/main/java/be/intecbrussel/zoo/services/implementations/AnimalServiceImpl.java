@@ -1,5 +1,6 @@
 package be.intecbrussel.zoo.services.implementations;
 
+import be.intecbrussel.zoo.controllers.implementations.AnimalControllerImpl;
 import be.intecbrussel.zoo.data.Animal;
 import be.intecbrussel.zoo.data.Country;
 import be.intecbrussel.zoo.repositories.AnimalRepository;
@@ -43,10 +44,6 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public void addAnimal(Animal animal) {
-        Country country = new Country();
-        countryService.getCountryByName(country.getCountryName());
-        animal.setCountry(country);
-       // animal = new Animal("", countryService.getCountryByName("")) ;
         animalRepository.save(animal);
     }
 
