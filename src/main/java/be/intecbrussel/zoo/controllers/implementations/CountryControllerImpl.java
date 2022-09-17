@@ -26,6 +26,12 @@ public class CountryControllerImpl implements CountryController {
         return "countries";
     }
 
+    @GetMapping("/countriesBS")
+    public String showAllCountriesBS(Model model) {
+        model.addAttribute("countries", countryService.getAllCountries());
+        model.addAttribute("country", new Country(""));
+        return "index";
+    }
 
     @Override
     @PostMapping("/addCountry")
