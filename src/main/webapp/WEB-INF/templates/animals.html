@@ -30,8 +30,9 @@
 
     <ul th:each="animal:${animals}">
         <div th:text="${animal.animalName}"> <a>animal </a></div><a th:href="@{/deleteAnimal/{id}(id=${animal.id})}"><button>Delete</button></a>
-        <!--<a>animal 2 <button>Delete</button></a>
-        <a>animal 3 <button>Delete</button></a>-->
+
+
+
     </ul>
 
    <form method="post" th:action="@{/addAnimal/{c}(c=${animal.country.countryName})}">

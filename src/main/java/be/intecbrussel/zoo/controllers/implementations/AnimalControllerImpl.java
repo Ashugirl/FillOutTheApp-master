@@ -27,6 +27,7 @@ public class AnimalControllerImpl implements AnimalController {
     @GetMapping("/animals/{countryName}")
     public String seeAllAnimalsByCountry(Model model, @PathVariable("countryName") String countryName) {
         Country country = countryService.getCountryByName(countryName);
+        model.addAttribute("countryName", countryName);
         model.addAttribute("animals", animalService.getAnimalsByCountry(country));
         model.addAttribute("animal", new Animal("", country));
         return "animals";
@@ -42,12 +43,10 @@ public class AnimalControllerImpl implements AnimalController {
     }
 
     @Override
-    @GetMapping("/deleteAnimal/{id}")
-    public String deleteAnimal(@RequestParam long id) {
+    @GetMapping ("/deleteAnimal/{id}")
+    public String deleteAnimal(@PathVariable long id) {
         Animal animal = animalService.getAnimalByID(id);
-        System.out.println(animal + " id: " + id);
-
         animalService.deleteAnimal(animal.getId());
-        return "redirect:/animals/{countryName}";
+        return "redirect:/countries";
     }
 }
