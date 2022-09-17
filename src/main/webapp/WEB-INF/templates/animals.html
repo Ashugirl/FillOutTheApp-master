@@ -29,7 +29,7 @@
 
 
     <ul th:each="animal:${animals}">
-        <a th:text="${animal.animalName}">animal<button>Delete</button></a>
+        <div th:text="${animal.animalName}"> <a>animal </a></div><a th:href="@{/deleteAnimal/{id}(id=${animal.id})}"><button>Delete</button></a>
         <!--<a>animal 2 <button>Delete</button></a>
         <a>animal 3 <button>Delete</button></a>-->
     </ul>
