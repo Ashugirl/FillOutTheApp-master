@@ -35,7 +35,10 @@
                     <div class="m-4 m-lg-5">
                         <h1 class="display-5 fw-bold">Countries</h1>
                         <p class="fs-4">Want to add a country? Do it here!</p>
-                        <a class="btn btn-primary btn-lg" href="#!">Submit</a>
+                        <form method="post" th:action="@{/addCountry}">
+
+                            <input type="text" name="countryName" th:text="${country.countryName}"> <br>
+                            <a class="btn btn-primary btn-lg" href="#"><input type="submit", value="submit"></a></form>
                     </div>
                 </div>
             </div>

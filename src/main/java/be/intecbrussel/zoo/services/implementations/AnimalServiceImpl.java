@@ -27,7 +27,7 @@ public class AnimalServiceImpl implements AnimalService {
         if(optional.isPresent()) {
             return (Animal)optional.get();
         }
-        return null;
+        return null ;
     }
 
     @Override

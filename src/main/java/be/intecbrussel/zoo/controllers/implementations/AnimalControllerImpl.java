@@ -33,6 +33,15 @@ public class AnimalControllerImpl implements AnimalController {
         return "animals";
     }
 
+    @GetMapping("/animalsBS/{countryName}")
+    public String seeAllAnimalsByCountryBS(Model model, @PathVariable("countryName") String countryName) {
+        Country country = countryService.getCountryByName(countryName);
+        model.addAttribute("countryName", countryName);
+        model.addAttribute("animals", animalService.getAnimalsByCountry(country));
+        model.addAttribute("animal", new Animal("", country));
+        return "animals";
+    }
+
     @Override
     @PostMapping("/addAnimal/{countryName}")
     public String addAnimal(String animalName, @PathVariable String countryName) {

@@ -39,4 +39,9 @@ public class CountryControllerImpl implements CountryController {
         countryService.createCountry(country);
         return "redirect:/countries";
     }
+    @PostMapping("/addCountryBS")
+    public String createCountryBS(Country country) {
+        countryService.createCountry(country);
+        return "redirect:/index";
+    }
 }

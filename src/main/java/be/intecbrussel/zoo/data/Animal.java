@@ -10,7 +10,6 @@ public class Animal {
     private long id;
     private String animalName;
     @ManyToOne(cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "countryName")
     private Country country;
 
     public Animal() {
