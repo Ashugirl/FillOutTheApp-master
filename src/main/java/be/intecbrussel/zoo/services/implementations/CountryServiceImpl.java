@@ -29,7 +29,7 @@ public class CountryServiceImpl implements CountryService {
         if (optional.isPresent()){
             return (Country)optional.get();
         }
-        return (Country)optional.get() ;
+        return null;
     }
 
     @Override

@@ -1,9 +1,7 @@
 package be.intecbrussel.zoo.data;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Country {
